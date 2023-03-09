@@ -1,9 +1,9 @@
 import React from 'react'
 
-class TripList extends React.Component {
-    render() {
-        return( 
-            <div>This will be the Trips Listed</div>
-        );
-    }
+export default function TripList() {
+  return (
+    <div>
+      This will be the trip list
+    </div>
+  )
 }
