@@ -1,0 +1,58 @@
+/* Container for the to-do list */
+.trip-container {
+    max-width: 500px;
+    margin: right;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input field for adding new to-do items */
+  .trip-input {
+    width: auto;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  /* Styling for the list of to-do items */
+  .trip-list {
+    margin-top: 20px;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Styling for individual to-do items */
+  .trip-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Checkbox for marking completed items */
+  .trip-item-input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Styling for the text of the to-do items */
+  .trip-item-label {
+    flex-grow: 1;
+    word-break: break-all;
+    font-size: 16px;
+  }
+  
+  /* Styling for the delete button */
+  .trip-item-button {
+    background-color: #262fb1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  h1 { font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; }
+  
