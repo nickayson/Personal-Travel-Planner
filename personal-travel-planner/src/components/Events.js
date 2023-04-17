@@ -10,6 +10,7 @@ export default function Events() {
     name: "",
     date: "",
     location: "",
+    price: "",
   });
 
   const handleInputChange = (event) => {
@@ -26,6 +27,7 @@ export default function Events() {
       name: "",
       date: "",
       location: "",
+      price: "",
     });
   };
 
@@ -64,6 +66,20 @@ export default function Events() {
         value={newEvent.location}
         onChange={handleInputChange}
       />
+      <input className="events-input"
+        type="text"
+        placeholder="Price"
+        name="price"
+        value={newEvent.price}
+        onChange={handleInputChange}
+      />
+      <input className="events-input"
+        type="text"
+        placeholder="Time"
+        name="time"
+        value={newEvent.time}
+        onChange={handleInputChange}
+      />
       <button className="events-item-button" onClick={addEvent}>Add Event</button>
       <ul>
         {events.map((event, index) => (
@@ -90,6 +106,22 @@ export default function Events() {
               value={event.location}
               onChange={(e) =>
                 handleEdit(index, { ...event, location: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Time"
+              value={event.time}
+              onChange={(e) =>
+                handleEdit(index, { ...event, time: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Price"
+              value={event.price}
+              onChange={(e) =>
+                handleEdit(index, { ...event, price: e.target.value })
               }
             />
             <button onClick={() => deleteEvent(index)}>Delete Event</button>
