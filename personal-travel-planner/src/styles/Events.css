@@ -1,5 +1,5 @@
-/* Container for the to-do list */
-.trip-container {
+/* Container for the events list */
+.events-container {
     max-width: auto;
     margin: right;
     padding: 20px;
@@ -8,45 +8,44 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   }
   
-  /* Input field for adding new to-do items */
-  .trip-input {
+  /* Input field for adding new events */
+  .events-input {
     width: auto;
     padding: 10px;
     border: none;
     border-bottom: 1px solid #FFFFFF;
     font-size: 16px;
     outline: none;
-    padding: 5px 10px
   }
   
-  /* Styling for the list of to-do items */
-  .trip-list {
+  /* Styling for the list of events */
+  .events-list {
     margin-top: 20px;
     list-style-type: none;
     padding: 0;
   }
   
-  /* Styling for individual to-do items */
-  .trip-item {
+  /* Styling for individual events */
+  .events-item {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
   }
   
-  /* Checkbox for marking completed items */
-  .trip-item-input[type="checkbox"] {
+  /* Checkbox for marking completed events */
+  .events-item-input[type="checkbox"] {
     margin-right: 10px;
   }
   
-  /* Styling for the text of the to-do items */
-  .trip-item-label {
+  /* Styling for the text of the events */
+  .events-item-label {
     flex-grow: 1;
     word-break: break-all;
     font-size: 16px;
   }
   
   /* Styling for the delete button */
-  .trip-item-button {
+  .events-item-button {
     background-color: #00396C;
     color: #fff;
     border: none;
@@ -54,8 +53,8 @@
     padding: 5px 10px;
     cursor: pointer;
   }
-
-  .trip-h1 { 
+  
+  .events-h1 { 
     color: #00396C;
     font-family: sans-serif;
     font-size: 46.17px; 
@@ -63,14 +62,14 @@
     line-height: 48px; 
     margin: 2; 
   }
-  
-  .trip-link { 
+
+  .event-link { 
     color: #00396C;
     font-family: sans-serif;
     font-size: 28.83px; 
     font-weight: bold; 
     line-height: 48px; 
-    margin: 2;
-    padding: 5px 10px; 
+    margin: 2; 
+    padding: 5px 10px;
   }
   
