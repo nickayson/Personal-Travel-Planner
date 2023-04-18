@@ -1,25 +1,27 @@
 import React from "react";
-import Slider from "react-slick";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 
-function Slideshow() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
+const slideImages = ["/images/delhi.jpg"];
 
+const Slideshow = () => {
   return (
-    <Slider {...settings}>
-      <div>
-        <img src="/images/delhi.jpg" alt="Slide 1" />
-      </div>
-      <div>
-        <img src="/images/delhi.jpg" alt="Slide 2" />
-      </div>
-    </Slider>
+    <Slide easing="ease">
+      {slideImages.map((image, index) => (
+        <div key={index} className="each-slide">
+          <div
+            style={{
+              backgroundImage: `url(${image})`,
+              height: "100vh",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </div>
+      ))}
+    </Slide>
   );
-}
+};
 
 export default Slideshow;
+
