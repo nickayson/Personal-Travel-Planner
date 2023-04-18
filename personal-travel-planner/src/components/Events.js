@@ -11,6 +11,7 @@ export default function Events() {
     date: "",
     location: "",
     price: "",
+    time: "",
   });
 
   const handleInputChange = (event) => {
@@ -28,6 +29,7 @@ export default function Events() {
       date: "",
       location: "",
       price: "",
+      time: "",
     });
   };
 
