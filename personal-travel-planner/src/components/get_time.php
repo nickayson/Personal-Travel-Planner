@@ -3,7 +3,6 @@
 <WorldClock timezone="Asia/Tokyo" label="Tokyo" />
 <WorldClock timezone="India/Delhi" label="Delhi" />
 <WorldClock timezone="Philippines/Manila" label="Manila" />
-<WorldClock timezone="America/New_York" label="New_York" />
 <WorldClock timezone="America/Los_Angeles" label="Los_Angeles" />
 <WorldClock timezone="Europe/London" label="London" />
 <WorldClock timezone="Europe/Berlin" label="Berlin" />

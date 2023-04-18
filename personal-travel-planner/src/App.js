@@ -4,9 +4,13 @@ import Events from "./components/Events";
 import "./styles/App.css";
 import WorldClock from "./components/WorldClock";
 
+import Slideshow from './components/Slideshow';
+
+
 function App() {
   return (
     <div className="container">
+      <Slideshow />
       <h1 className='app-h1'> Personal Travel Planner</h1>
       <BrowserRouter>
         <Routes>
@@ -20,9 +24,9 @@ function App() {
         <WorldClock timezone="Asia/Tokyo" label="Tokyo" />
         <WorldClock timezone="India/Delhi" label="Delhi" />
         <WorldClock timezone="Philippines/Manila" label="Manila" />
-        <WorldClock timezone="America/New_York" label="New_York" />
         <WorldClock timezone="America/Los_Angeles" label="Los_Angeles" />
-        <WorldClock timezone="Europe/London" label="London" />
+      </div>
+      <div classname="world-clock-container" style={{ display: "flex", flexDirection: "row" }}>
         <WorldClock timezone="Europe/Berlin" label="Berlin" />
         <WorldClock timezone="Asia/Shanghai" label="Shanghai" />
         <WorldClock timezone="Australia/Sydney" label="Sydney" />
