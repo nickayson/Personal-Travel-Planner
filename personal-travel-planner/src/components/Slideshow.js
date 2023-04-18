@@ -13,13 +13,10 @@ function Slideshow() {
   return (
     <Slider {...settings}>
       <div>
-        <img src="/images/Berlin.jpg" alt="Slide 1" />
+        <img src="/images/delhi.jpg" alt="Slide 1" />
       </div>
       <div>
-        <img src="/images/dubai.jpg" alt="Slide 2" />
-      </div>
-      <div>
-        <img src="/images/Johannesburg.jpg" alt="Slide 3" />
+        <img src="/images/delhi.jpg" alt="Slide 2" />
       </div>
     </Slider>
   );

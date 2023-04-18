@@ -9,8 +9,7 @@ import Slideshow from './components/Slideshow';
 
 function App() {
   return (
-    <div className="container">
-      <Slideshow />
+    <div className="App">
       <h1 className='app-h1'> Personal Travel Planner</h1>
       <BrowserRouter>
         <Routes>

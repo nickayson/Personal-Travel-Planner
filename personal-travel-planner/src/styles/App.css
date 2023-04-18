@@ -31,4 +31,9 @@ html, body {
     height: 100%;
     position: relative;
 }
+
+.App {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
   
