@@ -8,18 +8,18 @@
   .world-clock-label {
     color: #00396C;
     font-family: sans-serif;
-    font-size: 46.17px; 
+    font-size: 25px; 
     font-weight: bold; 
-    line-height: 48px; 
+    line-height: 30px; 
     margin: 2; 
   }
   
   .world-clock {
-    font-size: 32px;
+    font-size: 20px;
     color: #00396C;
     font-family: sans-serif;
     font-weight: bold; 
-    line-height: 48px; 
+    line-height: 25px; 
     margin: 2; 
   }
   

@@ -16,7 +16,7 @@
     border-bottom: 1px solid #FFFFFF;
     font-size: 16px;
     outline: none;
-    padding: 5px 10px
+    padding: 5px 10px;
   }
   
   /* Styling for the list of to-do items */
@@ -61,7 +61,7 @@
     font-size: 46.17px; 
     font-weight: bold; 
     line-height: 48px; 
-    margin: 2; 
+    text-align: left;
   }
   
   .trip-link { 
