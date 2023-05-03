@@ -1,12 +1,13 @@
-.world-clock-container {
+  .world-clock-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 10px;
+
   }
   
   .world-clock-label {
-    color: #00396C;
+    color: #FFFFFF;
     font-family: sans-serif;
     font-size: 25px; 
     font-weight: bold; 
@@ -16,10 +17,19 @@
   
   .world-clock {
     font-size: 20px;
-    color: #00396C;
+    color: #FFFFFF;
     font-family: sans-serif;
     font-weight: bold; 
     line-height: 25px; 
     margin: 2; 
   }
   
+  .world-container {
+    background-image: url('images/WorldMap.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px;
+    border-radius: 25px;
+    width: auto;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }

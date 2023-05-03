@@ -8,6 +8,7 @@
 
 body {
     background-color: #D9F6FA;
+    /* background-image: url("newyork.jpg"); */
 }
 
 .world-clock-container{
@@ -38,7 +39,4 @@ html, body {
     height: 100%;
     position: relative;
 }
-
-  
-  
   
