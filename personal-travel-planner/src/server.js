@@ -1,11 +1,13 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3001;
 
 app.use(cors()); // Add this line to allow cross-origin requests
+app.use(bodyParser.json()); // Add this line to parse JSON request bodies
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -30,7 +32,7 @@ app.post('/', (req, res) => {
   const { name } = req.body;
 
   const sql = 'INSERT INTO trips (name) VALUES (?)';
-  const values = [name];
+  const values = [name];  
 
   connection.query(sql, values, (err, result) => {
     if (err) {

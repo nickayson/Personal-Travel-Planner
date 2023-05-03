@@ -8,9 +8,25 @@ export default function TripList() {
   const [newtrip, setNewtrip] = useState("");
 
   const addtrip = () => {
-    settrips([...trips, newtrip]);
-    setNewtrip("");
+    fetch('http://localhost:3001/', { // Use the correct URL for your Express app
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: newtrip }),
+    })
+    .then((response) => response.text()) // Return response text here
+    .then((result) => {
+      console.log(result);
+      settrips([...trips, newtrip]);
+      setNewtrip("");
+    })
+    .catch((error) => {
+      console.error('Error adding trip: ', error);
+    });
   };
+  
+  
 
   const deletetrip = (index) => {
     const updatedtrips = trips.filter((trip, i) => i !== index);
