@@ -1,0 +1,41 @@
+
+.slide-image {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    display: block;
+    position: absolute;
+    object-fit: cover;
+    height: 500px;
+    width: 490px;
+    border-radius: 50%;
+    margin-left: 0;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.slide-image-two {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    display: block;
+    position: absolute;
+    object-fit: cover;
+    height: 500px;
+    width: 490px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.slide-image-two.active {
+    opacity: 1;
+}
+  
+.slide-image.active {
+    opacity: 1;
+}
+  

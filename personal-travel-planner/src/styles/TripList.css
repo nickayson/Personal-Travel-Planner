@@ -1,11 +1,12 @@
 /* Container for the to-do list */
 .trip-container {
     max-width: auto;
-    margin: right;
+    margin: 5px;
     padding: 20px;
     background-color: #F5F5F5;
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
   }
   
   /* Input field for adding new to-do items */

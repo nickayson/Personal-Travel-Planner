@@ -1,27 +1,40 @@
-import React from "react";
-import { Slide } from "react-slideshow-image";
-import "react-slideshow-image/dist/styles.css";
+import React, { useState, useEffect } from 'react';
+import '../styles/Slideshow.css';
 
-const slideImages = ["/images/delhi.jpg"];
+function Slideshow({ images }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-const Slideshow = () => {
+  useEffect(() => {
+    const interval = setInterval(goToNextSlide, 5000);
+    return () => clearInterval(interval);
+  }, [currentSlide]);
+
+  const goToNextSlide = () => {
+    const nextSlide = (currentSlide + 1) % images.length;
+    setCurrentSlide(nextSlide);
+  };
+
+  const goToPreviousSlide = () => {
+    const previousSlide = (currentSlide - 1 + images.length) % images.length;
+    setCurrentSlide(previousSlide);
+  };
+
   return (
-    <Slide easing="ease">
-      {slideImages.map((image, index) => (
-        <div key={index} className="each-slide">
-          <div
-            style={{
-              backgroundImage: `url(${image})`,
-              height: "100vh",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-        </div>
+    <div className='slideshow'>
+      {images.map((image, index) => (
+        <img 
+          key={index}
+          className={`slide-image ${index === currentSlide ? 'active' : ''}`}
+          src={image} 
+          alt={`Slide ${index}`} 
+        />
       ))}
-    </Slide>
+    </div>
   );
-};
+}
 
 export default Slideshow;
+
+
+
 
