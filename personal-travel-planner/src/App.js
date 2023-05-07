@@ -13,7 +13,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<TripList />} />
-            <Route path="/events/:trip" element={<Events />} />
+            <Route path="/events/:id" element={<Events />} />
           </Routes>
         </BrowserRouter>
         <div className="world-container">

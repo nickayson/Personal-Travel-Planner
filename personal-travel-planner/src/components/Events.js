@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Events.css";
 import { useParams } from 'react-router-dom';
 
 export default function Events() {
-  const { trip } = useParams();
+  const { id } = useParams();
+  // console.log(id);
+  const tripname = new URLSearchParams(window.location.search).get("name");
   const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/events/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        setEvents(data);
+      })
+      .catch(error => console.error('Error fetching events:', error));
+  }, [id]);
 
   const [newEvent, setNewEvent] = useState({
     name: "",
@@ -16,27 +27,57 @@ export default function Events() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setNewEvent({
-      ...newEvent,
-      [name]: value,
-    });
+    if (name === "date") {
+      const date = new Date(value).toISOString().slice(0, 10);
+      setNewEvent({
+        ...newEvent,
+        [name]: date,
+      });
+    } else {
+      setNewEvent({
+        ...newEvent,
+        [name]: value,
+      });
+    }
   };
+  
 
   const addEvent = () => {
-    setEvents([...events, newEvent]);
-    setNewEvent({
-      name: "",
-      date: "",
-      location: "",
-      price: "",
-      time: "",
-    });
+    const { name, date, location, price, time } = newEvent;
+    fetch(`http://localhost:3001/events/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, date, location, price, time })
+    })
+      .then(response => response.json())
+      .then(data => {
+        const { insertId } = data;
+        setEvents([...events, { id: insertId, name, date, location, price, time }]);
+        setNewEvent({
+          name: '',
+          date: '',
+          location: '',
+          price: '',
+          time: ''
+        });
+      })
+      .catch(error => console.error('Error adding event:', error));
   };
+  
 
-  const deleteEvent = (index) => {
-    const updatedEvents = events.filter((event, i) => i !== index);
-    setEvents(updatedEvents);
+  const deleteEvent = (index, eventId) => {
+    fetch(`http://localhost:3001/events/${id}/${eventId}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        const updatedEvents = events.filter((event, i) => i !== index);
+        setEvents(updatedEvents);
+      })
+      .catch((error) => console.error('Error deleting event: ', error));
   };
+  
 
   const handleEdit = (index, event) => {
     const updatedEvents = [...events];
@@ -46,7 +87,7 @@ export default function Events() {
 
   return (
     <div className="events-container">
-      <h1 className="events-h1">Events for {trip}</h1>
+      <h1 className="events-h1">Events for {tripname}</h1>
       <input className="events-input"
         type="text"
         placeholder="Event Name"
@@ -126,7 +167,7 @@ export default function Events() {
                 handleEdit(index, { ...event, price: e.target.value })
               }
             />
-            <button onClick={() => deleteEvent(index)}>Delete Event</button>
+            <button onClick={() => deleteEvent(index, event.id)}>Delete</button>
           </li>
         ))}
       </ul>

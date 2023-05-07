@@ -45,7 +45,7 @@ CREATE TABLE `events` (
 
 CREATE TABLE `trips` (
   `id` int(11) NOT NULL,
-  `trip_name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/TripList.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Events from "./Events";
 
 export default function TripList() {
-  const [trips, settrips] = useState([]);
-  const [newtrip, setNewtrip] = useState("");
+  const [trips, setTrips] = useState([]);
+  const [newTrip, setNewTrip] = useState("");
 
-  const addtrip = () => {
-    fetch('http://localhost:3001/', { // Use the correct URL for your Express app
+  const addTrip = () => {
+    fetch('http://localhost:3001/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name: newtrip }),
+      body: JSON.stringify({ name: newTrip }),
     })
-    .then((response) => response.text()) // Return response text here
+    .then((response) => response.text())
     .then((result) => {
       console.log(result);
-      settrips([...trips, newtrip]);
-      setNewtrip("");
+      setNewTrip("");
+      fetch('http://localhost:3001/')
+        .then(response => response.json())
+        .then(data => setTrips(data))
+        .catch(error => console.error('Error fetching trips: ', error));
     })
     .catch((error) => {
       console.error('Error adding trip: ', error);
@@ -27,10 +30,30 @@ export default function TripList() {
   };
   
   
+  useEffect(() => {
+    fetch('http://localhost:3001/') // Use the correct URL for your Express app
+      .then(response => response.json())
+      .then(data => setTrips(data))
+      .catch(error => console.error('Error fetching trips: ', error));
+  }, []);
 
-  const deletetrip = (index) => {
-    const updatedtrips = trips.filter((trip, i) => i !== index);
-    settrips(updatedtrips);
+  const deleteTrip = (index) => {
+    const trip = trips[index];
+    const tripId = trip.id;
+    const tripName = trip.name;
+    
+    fetch(`http://localhost:3001/${tripId}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        const updatedTrips = trips.filter((trip, i) => i !== index);
+        setTrips(updatedTrips);
+      })
+      .catch((error) => {
+        console.error('Error deleting trip: ', error);
+      });
   };
 
   return (
@@ -39,19 +62,19 @@ export default function TripList() {
       <input
         className="trip-input"
         type="text"
-        value={newtrip}
-        onChange={(e) => setNewtrip(e.target.value)}
+        value={newTrip}
+        onChange={(e) => setNewTrip(e.target.value)}
       />
-      <button className="trip-item-button" onClick={addtrip}>
+      <button className="trip-item-button" onClick={addTrip}>
         Add
       </button>
       <ul className="trip-list">
         {trips.map((trip, index) => (
           <li className="trip-item" key={index}>
-            <Link to={`/events/${trip}`} className="trip-link">{trip}</Link>
+            <Link to={`/events/${trip.id}?name=${encodeURIComponent(trip.name)}`} className="trip-link">{trip.name}</Link>
             <button
               className="trip-item-button"
-              onClick={() => deletetrip(index)}
+              onClick={() => deleteTrip(index)}
             >
               Delete
             </button>
@@ -59,8 +82,9 @@ export default function TripList() {
         ))}
       </ul>
       <Routes>
-        <Route path="/events/:trip" element={<Events />} />
+        <Route path="/events/:id" element={<Events />} />
       </Routes>
     </div>
   );
 }
+

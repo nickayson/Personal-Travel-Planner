@@ -1,5 +1,14 @@
 # Getting Started with Create React App
 
+PLEASE RUN THESE NPM INSTALLS IF WANTING TO TEST 
+### `npm install concurrently`
+### `npm install cors`
+### `npm install body-parser`
+### `npm install mysql express`
+### `npm install axios`
+
+"start": "concurrently \"npm run server\" \"npm run client\"",
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
