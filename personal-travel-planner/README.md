@@ -7,7 +7,20 @@ PLEASE RUN THESE NPM INSTALLS IF WANTING TO TEST
 ### `npm install mysql express`
 ### `npm install axios`
 
-"start": "concurrently \"npm run server\" \"npm run client\"",
+First we can start the server and client by using 
+### `npm start`
+We have modified the package.json to run both with this command
+### `start": "concurrently \"npm run server\" \"npm run client\"" `
+
+However you can run the server seperately with
+### `node server.js`
+Followed by 
+### `npm start`
+
+
+
+
+DEFAULT REACT README
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
