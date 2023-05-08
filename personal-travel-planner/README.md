@@ -1,5 +1,7 @@
-# Getting Started with Create React App
-
+# Overview
+We are creating a personal travel planner that is using localhost server via xxamp and developed using react and node.js.  
+The ports that we are using are port 3000, 3001 for react and the server respectively.
+  
 PLEASE RUN THESE NPM INSTALLS IF WANTING TO TEST 
 ### `npm install concurrently`
 ### `npm install cors`
@@ -16,10 +18,9 @@ However you can run the server seperately with
 ### `node server.js`
 Followed by 
 ### `npm start`
-
-
-
-
+   
+   
+   
 DEFAULT REACT README
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
