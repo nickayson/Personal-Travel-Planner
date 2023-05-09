@@ -136,31 +136,31 @@ app.delete('/events/:id/:eventId', (req, res) => {
   });
 });
 
-app.put('/events/:id/:eventId', (req, res) => {
-  const { name, date, location, price, time } = req.body;
-  const { id, eventId } = req.params;
+// app.put('/events/:id/:eventId', (req, res) => {
+//   const { name, date, location, price, time } = req.body;
+//   const { id, eventId } = req.params;
 
-  if (!id || !eventId) {
-    res.status(400).send('Invalid request');
-    return;
-  }
+//   if (!id || !eventId) {
+//     res.status(400).send('Invalid request');
+//     return;
+//   }
 
-  const sql = 'UPDATE events SET name = ?, date = ?, location = ?, price = ?, time = ? WHERE id = ? AND trip_id = ?';
-  const values = [name, date, location, price, time, eventId, id];
+//   const sql = 'UPDATE events SET name = ?, date = ?, location = ?, price = ?, time = ? WHERE id = ? AND trip_id = ?';
+//   const values = [name, date, location, price, time, eventId, id];
 
-  connection.query(sql, values, (err, results) => {
-    if (err) {
-      console.error('Error updating event: ', err);
-      res.status(500).send('Error updating event');
-      return;
-    }
+//   connection.query(sql, values, (err, results) => {
+//     if (err) {
+//       console.error('Error updating event: ', err);
+//       res.status(500).send('Error updating event');
+//       return;
+//     }
 
-    res.status(200).json({
-      message: 'Event updated successfully',
-      data: results
-    });
-  });
-});
+//     res.status(200).json({
+//       message: 'Event updated successfully',
+//       data: results
+//     });
+//   });
+// });
 
 
 

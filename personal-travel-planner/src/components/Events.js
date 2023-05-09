@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Events.css";
-import { useParams } from 'react-router-dom';
-import { Slider } from 'antd';
-
+import { useParams } from "react-router-dom";
+import { Slider } from "antd";
 
 export default function Events() {
   const [timeSlider, setTimeSlider] = useState(0);
   const { id } = useParams();
-  // console.log(id);
   const tripname = new URLSearchParams(window.location.search).get("name");
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:3001/events/${id}`)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setEvents(data);
       })
-      .catch(error => console.error('Error fetching events:', error));
+      .catch((error) => console.error("Error fetching events:", error));
   }, [id]);
 
   const [newEvent, setNewEvent] = useState({
@@ -43,48 +41,72 @@ export default function Events() {
       });
     }
   };
-  
+
   const addEvent = () => {
     const { name, date, location, price, time } = newEvent;
     fetch(`http://localhost:3001/events/${id}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, date, location, price, time })
+      body: JSON.stringify({ name, date, location, price, time }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         const { insertId } = data;
-        setEvents([...events, { id: insertId, name, date, location, price, time }]);
+        setEvents([
+          ...events,
+          { id: insertId, name, date, location, price, time },
+        ]);
         setNewEvent({
-          name: '',
-          date: '',
-          location: '',
-          price: '',
-          time: ''
+          name: "",
+          date: "",
+          location: "",
+          price: "",
+          time: "",
         });
       })
-      .catch(error => console.error('Error adding event:', error));
+      .catch((error) => console.error("Error adding event:", error));
   };
-  
 
   const deleteEvent = (index, eventId) => {
     fetch(`http://localhost:3001/events/${id}/${eventId}`, {
-      method: 'DELETE',
+      method: "DELETE",
     })
       .then(() => {
         const updatedEvents = events.filter((event, i) => i !== index);
         setEvents(updatedEvents);
       })
-      .catch((error) => console.error('Error deleting event: ', error));
+      .catch((error) => console.error("Error deleting event: ", error));
   };
-  
+
   const handleEdit = (index, event) => {
     const updatedEvents = [...events];
     updatedEvents[index] = { ...event };
     setEvents(updatedEvents);
   };
+
+  // const updateEvent = (index, event) => {
+  //   fetch(`http://localhost:3001/events/${id}/${eventId}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(event),
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         const updatedEvents = [...events];
+  //         updatedEvents[index] = { ...event };
+  //         setEvents(updatedEvents);
+  //         console.log("Event updated successfully");
+  //       } else {
+  //         console.error("Error updating event");
+  //       }
+  //     })
+  //     .catch((error) => console.error("Error updating event: ", error));
+  // };
+  
      
 
   return (
@@ -191,7 +213,7 @@ export default function Events() {
                 handleEdit(index, { ...event, time: e.target.value })
               }
             />
-            {/* <button className="events-item-button" onClick={() => deleteEvent(index, event.id)}>Update</button> */}
+            {/* <button className="events-item-button" onClick={() => updateEvent(index, event.id)}>Update</button> */}
             <button className="events-item-button" onClick={() => deleteEvent(index, event.id)}>Delete</button>
           </li>
         ))}
