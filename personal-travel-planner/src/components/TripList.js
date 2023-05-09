@@ -56,6 +56,68 @@ export default function TripList() {
       });
   };
 
+  const updatebutton = document.getElementById("update");
+  const deletebutton = document.getElementById("delete");
+  const addbutton = document.getElementById("add");
+
+  if (updatebutton) {
+    updatebutton.addEventListener("click", () => {
+        const notification = document.createElement("div");
+        notification.textContent = "Update Successful!";
+        notification.style.position = "absolute";
+        notification.style.top = "10px";
+        notification.style.right = "10px";
+        notification.style.padding = "10px";
+        notification.style.background = "green";
+        notification.style.animation = "fadeout 2s forwards";
+        notification.style.borderRadius = "5px";
+        notification.style.color = "white"; 
+        notification.style.fontFamily = "sans-serif"; 
+        document.body.appendChild(notification);
+        setTimeout(() => {
+          notification.remove();
+        }, 2000);
+      });
+  }
+  if(deletebutton){
+    deletebutton.addEventListener("click", () => {
+      const notification = document.createElement("div");
+      notification.textContent = "Event Deleted!";
+      notification.style.position = "absolute";
+      notification.style.top = "10px";
+      notification.style.right = "10px";
+      notification.style.padding = "10px";
+      notification.style.background = "green";
+      notification.style.animation = "fadeout 2s forwards";
+      notification.style.borderRadius = "5px";
+      notification.style.color = "white"; 
+      notification.style.fontFamily = "sans-serif"; 
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.remove();
+      }, 2000);
+    });
+  }
+  if(addbutton){
+    addbutton.addEventListener("click", () => {
+      const notification = document.createElement("div");
+      notification.textContent = "Event Added!";
+      notification.style.position = "absolute";
+      notification.style.top = "10px";
+      notification.style.right = "10px";
+      notification.style.padding = "10px";
+      notification.style.background = "green";
+      notification.style.animation = "fadeout 2s forwards";
+      notification.style.borderRadius = "5px";
+      notification.style.color = "white"; 
+      notification.style.fontFamily = "sans-serif"; 
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.remove();
+      }, 2000);
+    });
+  }
+
   return (
     <div className="trip-container">
       <h1 className="trip-h1">Create a Trip!</h1>
@@ -65,14 +127,14 @@ export default function TripList() {
         value={newTrip}
         onChange={(e) => setNewTrip(e.target.value)}
       />
-      <button className="trip-item-button" onClick={addTrip}>
+      <button id="add" className="trip-item-button" onClick={addTrip}>
         Add
       </button>
       <ul className="trip-list">
         {trips.map((trip, index) => (
           <li className="trip-item" key={index}>
             <Link to={`/events/${trip.id}?name=${encodeURIComponent(trip.name)}`} className="trip-link">{trip.name}</Link>
-            <button
+            <button id="delete"
               className="trip-item-button"
               onClick={() => deleteTrip(index)}
             >

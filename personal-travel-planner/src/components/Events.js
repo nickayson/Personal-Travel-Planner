@@ -3,6 +3,8 @@ import "../styles/Events.css";
 import { useParams } from "react-router-dom";
 import { Slider } from "antd";
 
+
+
 export default function Events() {
   const [timeSlider, setTimeSlider] = useState(0);
   const { id } = useParams();
@@ -25,6 +27,7 @@ export default function Events() {
     price: "",
     time: "",
   });
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -84,30 +87,99 @@ export default function Events() {
     const updatedEvents = [...events];
     updatedEvents[index] = { ...event };
     setEvents(updatedEvents);
+
+    // Call updateEvent to send the updated event to the backend
+    updateEvent(index, event.id, event);
+
   };
 
-  // const updateEvent = (index, event) => {
-  //   fetch(`http://localhost:3001/events/${id}/${eventId}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(event),
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         const updatedEvents = [...events];
-  //         updatedEvents[index] = { ...event };
-  //         setEvents(updatedEvents);
-  //         console.log("Event updated successfully");
-  //       } else {
-  //         console.error("Error updating event");
-  //       }
-  //     })
-  //     .catch((error) => console.error("Error updating event: ", error));
-  // };
-  
-     
+  const updateEvent = (index, eventId, updatedEvent) => {
+    const { name, date, location, price, time } = updatedEvent;
+    fetch(`http://localhost:3001/events/${id}/${eventId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, date, location, price, time }),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        const updatedEvents = [...events];
+        updatedEvents[index] = {
+          ...updatedEvents[index],
+          name,
+          date,
+          location,
+          price,
+          time,
+        };
+        setEvents(updatedEvents);
+      })
+      .catch((error) => console.error("Error updating event: ", error));
+  };
+
+  const updatebutton = document.getElementById("update");
+  const deletebutton = document.getElementById("delete");
+  const addbutton = document.getElementById("add");
+
+  if (updatebutton) {
+    updatebutton.addEventListener("click", () => {
+        const notification = document.createElement("div");
+        notification.textContent = "Update Successful!";
+        notification.style.position = "absolute";
+        notification.style.top = "10px";
+        notification.style.right = "10px";
+        notification.style.padding = "10px";
+        notification.style.background = "green";
+        notification.style.animation = "fadeout 2s forwards";
+        notification.style.borderRadius = "5px";
+        notification.style.color = "white"; 
+        notification.style.fontFamily = "sans-serif"; 
+        document.body.appendChild(notification);
+        setTimeout(() => {
+          notification.remove();
+        }, 2000);
+      });
+  }
+  if(deletebutton){
+    deletebutton.addEventListener("click", () => {
+      const notification = document.createElement("div");
+      notification.textContent = "Event Deleted!";
+      notification.style.position = "absolute";
+      notification.style.top = "10px";
+      notification.style.right = "10px";
+      notification.style.padding = "10px";
+      notification.style.background = "green";
+      notification.style.animation = "fadeout 2s forwards";
+      notification.style.borderRadius = "5px";
+      notification.style.color = "white"; 
+      notification.style.fontFamily = "sans-serif"; 
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.remove();
+      }, 2000);
+    });
+  }
+  if(addbutton){
+    addbutton.addEventListener("click", () => {
+      const notification = document.createElement("div");
+      notification.textContent = "Event Added!";
+      notification.style.position = "absolute";
+      notification.style.top = "10px";
+      notification.style.right = "10px";
+      notification.style.padding = "10px";
+      notification.style.background = "green";
+      notification.style.animation = "fadeout 2s forwards";
+      notification.style.borderRadius = "5px";
+      notification.style.color = "white"; 
+      notification.style.fontFamily = "sans-serif"; 
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.remove();
+      }, 2000);
+    });
+  }
+
 
   return (
     <div className="events-container">
@@ -169,11 +241,12 @@ export default function Events() {
         });
         }}
       />
-      <button className="events-item-button" onClick={addEvent}>Add Event</button>
+      <button id="add" className="events-item-button" onClick={addEvent}>Add Event</button>
       <ul className="ulist">
         {events.map((event, index) => (
           <li key={index}>
             <input className="events-input"
+              title="Event Name" 
               type="text"
               placeholder="Event Name"
               value={event.name}
@@ -182,6 +255,7 @@ export default function Events() {
               }
             />
             <input className="events-input"
+              title="Date" 
               type="date"
               placeholder="Date"
               value={event.date}
@@ -190,6 +264,7 @@ export default function Events() {
               }
             />
             <input className="events-input"
+              title="Location" 
               type="text"
               placeholder="Location"
               value={event.location}
@@ -198,6 +273,7 @@ export default function Events() {
               }
             />
             <input className="events-input"
+              title="Price" 
               type="text"
               placeholder="Price"
               value={event.price}
@@ -206,6 +282,7 @@ export default function Events() {
               }
             />
             <input className="events-input"
+              title="Time" 
               type="text"
               placeholder="Time"
               value={event.time}
@@ -213,8 +290,8 @@ export default function Events() {
                 handleEdit(index, { ...event, time: e.target.value })
               }
             />
-            {/* <button className="events-item-button" onClick={() => updateEvent(index, event.id)}>Update</button> */}
-            <button className="events-item-button" onClick={() => deleteEvent(index, event.id)}>Delete</button>
+            <button id="update" className="events-item-button" onClick={() => updateEvent(index, event.id)}>Update</button>
+            <button id="delete" className="events-item-button" onClick={() => deleteEvent(index, event.id)}>Delete</button>
           </li>
         ))}
       </ul>

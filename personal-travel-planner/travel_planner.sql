@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `date` date NOT NULL,
+  `date` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `time` time NOT NULL,
