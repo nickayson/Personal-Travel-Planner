@@ -8,6 +8,7 @@ PLEASE RUN THESE NPM INSTALLS IF WANTING TO TEST
 ### `npm install body-parser`
 ### `npm install mysql express`
 ### `npm install axios`
+### `npm install antd`
 
 First we can start the server and client by using 
 ### `npm start`

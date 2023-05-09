@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Events.css";
 import { useParams } from 'react-router-dom';
+import { Slider } from 'antd';
+
 
 export default function Events() {
+  const [timeSlider, setTimeSlider] = useState(0);
   const { id } = useParams();
   // console.log(id);
   const tripname = new URLSearchParams(window.location.search).get("name");
@@ -41,7 +44,6 @@ export default function Events() {
     }
   };
   
-
   const addEvent = () => {
     const { name, date, location, price, time } = newEvent;
     fetch(`http://localhost:3001/events/${id}`, {
@@ -78,12 +80,12 @@ export default function Events() {
       .catch((error) => console.error('Error deleting event: ', error));
   };
   
-
   const handleEdit = (index, event) => {
     const updatedEvents = [...events];
-    updatedEvents[index] = event;
+    updatedEvents[index] = { ...event };
     setEvents(updatedEvents);
   };
+     
 
   return (
     <div className="events-container">
@@ -123,11 +125,33 @@ export default function Events() {
         value={newEvent.time}
         onChange={handleInputChange}
       />
+      <div>
+        <p className="events-p">
+          Please slide for a time!
+        </p>
+      </div>
+      <Slider
+       className="events-slider"
+        min={0}
+        max={24 * 60}
+        step={15}
+        value={timeSlider}
+        onChange={(value) => {
+        setTimeSlider(value);
+        const hours = Math.floor(value / 60);
+        const minutes = value % 60;
+        const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        setNewEvent({
+        ...newEvent,
+        time: timeString,
+        });
+        }}
+      />
       <button className="events-item-button" onClick={addEvent}>Add Event</button>
-      <ul>
+      <ul className="ulist">
         {events.map((event, index) => (
           <li key={index}>
-            <input
+            <input className="events-input"
               type="text"
               placeholder="Event Name"
               value={event.name}
@@ -135,7 +159,7 @@ export default function Events() {
                 handleEdit(index, { ...event, name: e.target.value })
               }
             />
-            <input
+            <input className="events-input"
               type="date"
               placeholder="Date"
               value={event.date}
@@ -143,7 +167,7 @@ export default function Events() {
                 handleEdit(index, { ...event, date: e.target.value })
               }
             />
-            <input
+            <input className="events-input"
               type="text"
               placeholder="Location"
               value={event.location}
@@ -151,15 +175,7 @@ export default function Events() {
                 handleEdit(index, { ...event, location: e.target.value })
               }
             />
-            <input
-              type="text"
-              placeholder="Time"
-              value={event.time}
-              onChange={(e) =>
-                handleEdit(index, { ...event, time: e.target.value })
-              }
-            />
-            <input
+            <input className="events-input"
               type="text"
               placeholder="Price"
               value={event.price}
@@ -167,7 +183,16 @@ export default function Events() {
                 handleEdit(index, { ...event, price: e.target.value })
               }
             />
-            <button onClick={() => deleteEvent(index, event.id)}>Delete</button>
+            <input className="events-input"
+              type="text"
+              placeholder="Time"
+              value={event.time}
+              onChange={(e) =>
+                handleEdit(index, { ...event, time: e.target.value })
+              }
+            />
+            {/* <button className="events-item-button" onClick={() => deleteEvent(index, event.id)}>Update</button> */}
+            <button className="events-item-button" onClick={() => deleteEvent(index, event.id)}>Delete</button>
           </li>
         ))}
       </ul>
