@@ -1,5 +1,5 @@
 .app-h1 {
-    color: #00396C;
+    color: rgb(69, 69, 245);
     font-family: sans-serif;
     font-size: 51.94px;
     font-weight: bold;
@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #D9F6FA;
+    background-color: rgb(36, 36, 36);
     /* background-image: url("newyork.jpg"); */
 }
 
