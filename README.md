@@ -2,6 +2,9 @@
 We are creating a personal travel planner that is using localhost server via xxamp and developed using react and node.js.  
 The ports that we are using are port 3000, 3001 for react and the server respectively.
 
+# It is necessary to have xampp installed for this to work
+To set up Server in phpmyadmin, run the sql file from the github repo
+
 PLEASE RUN THESE NPM INSTALLS IF WANTING TO TEST 
 ### `npm install concurrently`
 ### `npm install cors`
@@ -15,7 +18,6 @@ First we can start the server and client by using
 We have modified the package.json to run both with this command
 ### `start": "concurrently \"npm run server\" \"npm run client\"" `
 
-To set up Server in phpmyadmin, run the sql file from the github repo
 
 However you can run the server seperately with
 ### `node server.js`
